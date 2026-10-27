@@ -13,7 +13,6 @@
 7. [Programs](#7-programs)
 8. [Observations (with screenshots)](#8-observations-with-screenshots)
 9. [Result Analysis](#9-result-analysis)
-10. [Problems Faced & Fixes](#10-problems-faced--fixes)
 11. [Conclusion](#11-conclusion)
 12. [Viva Questions](#12-viva-questions)
 13. [Repository Structure](#13-repository-structure)
@@ -251,16 +250,7 @@ With a barrier, **every** "before barrier" line appears before **any** "after ba
 - Barriers do not protect data but synchronize the phases of a parallel computation, at the cost of waiting for the slowest thread. Semaphores generalize mutual exclusion (and can allow a controlled number of threads into a region) at a moderate overhead. 
 - The comparison benchmark confirms that unsynchronized access is fastest but unreliable, while the choice among critical/atomic/lock/semaphore is a trade-off between strength of guarantee, overhead, and scalability as thread count grows. 
 
-## 10. Problems Faced & Fixes
-Issues that occurred while running this experiment (visible in Screenshot 1 and 3):
 
-| Problem | Cause | Fix |
-|---|---|---|
-| `bash: ./race.c: Permission denied` | Tried to run the **source file** instead of the executable | Run `./race` (the compiled binary) |
-| `OMP_NUM_THREADS3: command not found` | Missing `=` sign | Use `OMP_NUM_THREADS=3 ./critical` |
-| `./critical` printed `Counter=200000` instead of `10000000` | Several programs (`atomic`, `barrier`, `semaphore`) were compiled with `-o critical`, **overwriting the critical binary** with the semaphore program | Give every program its own output name (`-o atomic`, `-o barrier`, `-o semaphore`); the `Makefile` does this automatically |
-| Semaphore compiled with `-fopenmp` | Wrong flag for a pthread program | Use `gcc semaphore.c -pthread -o semaphore` |
-| `compare_sync` ran with 1,000,000 instead of 10,000,000 increments | `N` was reduced to 1,000,000 for a quicker run | Final source keeps `N = 1000000L`; change to `10000000L` for longer runs |
 
 ## 11. Conclusion
 - Unsynchronized access to a shared variable causes a **race condition**: it is the fastest option but gives wrong, unrepeatable results (e.g., 3,730,512 and 9,017,564 instead of 10,000,000 for 4 threads).
