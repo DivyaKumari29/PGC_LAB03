@@ -1,9 +1,5 @@
 # Experiment 5 — Analysis of Synchronization Mechanisms in Parallel Programs
 
-> **Course:** Parallel & Grid Computing (PGC) Lab
-> **Name:** ____________________  **Roll No.:** ____________  **Batch/Section:** ________
-> **Date of Experiment:** 27 October 2026  **Date of Submission:** ____________
-> **Faculty / Lab In-charge:** ____________________  **Signature:** ____________
 
 ---
 
