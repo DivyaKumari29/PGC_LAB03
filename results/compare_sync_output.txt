@@ -1,0 +1,28 @@
+Transcribed from screenshot docs/images/ss2_compare_sync_output.png (N = 1,000,000)
+
+Comparing synchronization mechanisms for 1000000 shared increments
+
+Mechanism  | Threads |  Final Count | Correctness | Time (s)
+---------------------------------------------------------------
+None       |       1 |      1000000 |    Correct |     0.0004
+Critical   |       1 |      1000000 |    Correct |     0.0096
+Atomic     |       1 |      1000000 |    Correct |     0.0055
+Lock       |       1 |      1000000 |    Correct |     0.0094
+---------------------------------------------------------------
+None       |       2 |       522454 |  INCORRECT |     0.0011
+Critical   |       2 |      1000000 |    Correct |     0.0187
+Atomic     |       2 |      1000000 |    Correct |     0.0077
+Lock       |       2 |      1000000 |    Correct |     0.0200
+---------------------------------------------------------------
+None       |       4 |       500000 |  INCORRECT |     0.0022
+Critical   |       4 |      1000000 |    Correct |     0.0324
+Atomic     |       4 |      1000000 |    Correct |     0.0081
+Lock       |       4 |      1000000 |    Correct |     0.0254
+---------------------------------------------------------------
+None       |       8 |       125000 |  INCORRECT |     0.0016
+Critical   |       8 |      1000000 |    Correct |     0.0255
+Atomic     |       8 |      1000000 |    Correct |     0.0077
+Lock       |       8 |      1000000 |    Correct |     0.0219
+---------------------------------------------------------------
+
+Expected correct final count = 1000000
