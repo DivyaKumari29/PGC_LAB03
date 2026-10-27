@@ -96,7 +96,8 @@ An explicit mutual-exclusion lock (`omp_set_lock` / `omp_unset_lock`). Behaves l
 
 ## 5. Diagram
 
-![Synchronization mechanisms](docs/images/fig1_sync_diagram.png)
+![Synchronization mechanisms]
+<img width="1950" height="1110" alt="image" src="https://github.com/user-attachments/assets/441f4d4e-826c-4554-a0d7-d31079c01fcc" />
 
 *Fig. 1 — Multiple threads accessing a shared resource through different synchronization mechanisms.*
 
