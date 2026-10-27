@@ -216,18 +216,9 @@ Four-thread runs of `race` produced **3730512** (Screenshot 2), **5395716** and 
 Raw text copy: [`results/compare_sync_output.txt`](results/compare_sync_output.txt)
 
 ### 8.5 Semaphore
-Two pthreads each add 100,000 → expected **200,000**.
+
 
 ![Semaphore and barrier](docs/images/ss5_semaphore_barrier1.png)
-
-*Screenshot 5 — `semaphore` output (`Counter=200000`) followed by `barrier` with 1 and 8 threads.*
-
-| Program | Final Counter | Correct? |
-|---|---|---|
-| semaphore (run 1) | 200000 | ✅ Yes |
-| semaphore (run 2) | 200000 | ✅ Yes |
-
-> `OMP_NUM_THREADS` has **no effect** on this program: it creates exactly two pthreads itself, so the result and thread count are the same for any setting.
 
 ### 8.6 Barrier
 With a barrier, **every** "before barrier" line appears before **any** "after barrier" line, though the order *within* each group varies.
@@ -255,10 +246,10 @@ With a barrier, **every** "before barrier" line appears before **any** "after ba
 <img width="1200" height="750" alt="image" src="https://github.com/user-attachments/assets/2c8e0e26-cda7-4306-a3b5-47cc3f2fd74a" />
 
 **Key points**
--Atomic operations provide the best balance of correctness and performance for simple shared-variable updates because they rely on lightweight hardware instructions. 
--Critical sections and locks guarantee correctness but limit scalability since threads must wait in turn to enter the protected region.
--Barriers do not protect data but synchronize the phases of a parallel computation, at the cost of waiting for the slowest thread. Semaphores generalize mutual exclusion (and can allow a controlled number of threads into a region) at a moderate overhead. 
--The comparison benchmark confirms that unsynchronized access is fastest but unreliable, while the choice among critical/atomic/lock/semaphore is a trade-off between strength of guarantee, overhead, and scalability as thread count grows. 
+- Atomic operations provide the best balance of correctness and performance for simple shared-variable updates because they rely on lightweight hardware instructions. 
+- Critical sections and locks guarantee correctness but limit scalability since threads must wait in turn to enter the protected region.
+- Barriers do not protect data but synchronize the phases of a parallel computation, at the cost of waiting for the slowest thread. Semaphores generalize mutual exclusion (and can allow a controlled number of threads into a region) at a moderate overhead. 
+- The comparison benchmark confirms that unsynchronized access is fastest but unreliable, while the choice among critical/atomic/lock/semaphore is a trade-off between strength of guarantee, overhead, and scalability as thread count grows. 
 
 ## 10. Problems Faced & Fixes
 Issues that occurred while running this experiment (visible in Screenshot 1 and 3):
