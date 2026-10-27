@@ -252,13 +252,13 @@ With a barrier, **every** "before barrier" line appears before **any** "after ba
 | Lock (`omp_lock_t`) | ✅ Correct | Slow, similar to critical (0.0094–0.0254 s) | Poor to moderate |
 | Barrier | Synchronizes phases | Waiting overhead | Moderate — limited by slowest thread |
 | Semaphore | ✅ Correct | Moderate (system-call overhead) | Moderate |
+<img width="1200" height="750" alt="image" src="https://github.com/user-attachments/assets/2c8e0e26-cda7-4306-a3b5-47cc3f2fd74a" />
 
 **Key points**
-- **Race condition:** correct only with 1 thread; every additional thread loses more updates.
-- **Atomic is ~3–4× faster than critical/lock** at 4 and 8 threads (≈ 0.008 s vs 0.022–0.032 s).
-- **Critical vs. lock:** both serialize threads, so their times are close; they rise with thread count because threads spend more time waiting than working.
-- **None is the fastest only because it is wrong** — speed without correctness is useless.
-- Timings vary from run to run and by VM/core count; the *trend* matters, not the exact values.
+-Atomic operations provide the best balance of correctness and performance for simple shared-variable updates because they rely on lightweight hardware instructions. 
+-Critical sections and locks guarantee correctness but limit scalability since threads must wait in turn to enter the protected region.
+-Barriers do not protect data but synchronize the phases of a parallel computation, at the cost of waiting for the slowest thread. Semaphores generalize mutual exclusion (and can allow a controlled number of threads into a region) at a moderate overhead. 
+-The comparison benchmark confirms that unsynchronized access is fastest but unreliable, while the choice among critical/atomic/lock/semaphore is a trade-off between strength of guarantee, overhead, and scalability as thread count grows. 
 
 ## 10. Problems Faced & Fixes
 Issues that occurred while running this experiment (visible in Screenshot 1 and 3):
