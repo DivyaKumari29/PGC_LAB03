@@ -339,39 +339,5 @@ git branch -M main
 git remote add origin https://github.com/<your-username>/pgc-lab-exp5-sync.git
 git push -u origin main
 ```
-3. GitHub asks for a **Personal Access Token** instead of a password: *Settings → Developer settings → Personal access tokens → Generate*, then paste it as the password.
 
-### C. Reuse as a template for the next experiment
-```bash
-cp -r sync-lab pgc-lab-exp6-<topic>   # copy the folder
-cd pgc-lab-exp6-<topic>
-rm -rf .git bin                        # remove old history & binaries
-rm docs/images/*.png results/*         # remove old screenshots/results
-```
-Then:
-1. Replace the files in `src/` with the new programs and update the `Makefile` names.
-2. Take new terminal screenshots → save in `docs/images/`.
-3. Edit `README.md`: change the title, Aim, Objectives, Theory, Observations, Conclusion (keep the same 14-section layout).
-4. Repeat **Step B** with a new repository name.
 
-*(Or use GitHub's own method: open this repo → **Settings → check "Template repository"**; for each new experiment click **Use this template → Create a new repository**.)*
-
-### D. Daily workflow (update an existing repo)
-```bash
-git status                     # see what changed
-git add .                      # stage changes
-git commit -m "Add screenshots"
-git push                       # upload
-git pull                       # download latest (e.g., on another PC)
-git clone <repo-url>           # first-time copy of any repo
-```
-
-### E. Quick fixes
-| Problem | Fix |
-|---|---|
-| `fatal: remote origin already exists` | `git remote set-url origin <url>` |
-| Push rejected | `git pull --rebase origin main` then `git push` |
-| Images not showing on GitHub | Use relative paths like `docs/images/x.png` and commit the PNGs |
-
----
-*Prepared for the Parallel & Grid Computing laboratory — Experiment 5.*
